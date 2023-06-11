@@ -1,0 +1,62 @@
+﻿@using static CompeteNow.Infrastructure.Enumerations;
+@model CompeteNow.Models.SigninFormViewModel
+
+@{
+    ViewData["Title"] = "Signin";
+}
+
+<div class="container">
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-6">
+            <h1 class="text-center mb-4">Signin</h1>
+
+            <form asp-action="Signin" class="needs-validation" novalidate>
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="form-group">
+                    <label asp-for="Email" class="control-label">Email</label>
+                    <input asp-for="Email" class="form-control" required />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Password" class="control-label">Password</label>
+                    <input asp-for="Password" class="form-control" required />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="BirthDate" class="control-label">Birth Date</label>
+                    <input asp-for="BirthDate" class="form-control" required />
+                    <span asp-validation-for="BirthDate" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Genre" class="control-label">Genre</label>
+                    <select class="form-select" asp-for="Genre" id="genre" name="genre" aria-label="Default select example" required>
+                        <option value="" selected disabled>Choose a genre</option>
+                        @foreach (UserGenre item in Enum.GetValues(typeof(UserGenre)))
+                        {
+                            <option value="@item">@item</option>
+                        }
+                    </select>
+                    <span asp-validation-for="Genre" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mt-3">
+                    <input type="submit" value="Register" class="btn btn-primary btn-block" />
+                </div>
+            </form>
+
+            <div class="text-center mt-3">
+                <a asp-action="Index">Back to List</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
